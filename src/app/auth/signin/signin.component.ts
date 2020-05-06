@@ -25,11 +25,11 @@ export class SigninComponent implements OnInit {
     });
   }
 
-  onCreateUser() {
+  onConnectUser() {
     let user: User;
     user = new User(this.userForm.get('email').value, this.userForm.get('password').value);
 
-    this.authService.createUser(user).then(
+    this.authService.signIn(user).then(
       () => {
         this.router.navigate(['']);
       },
