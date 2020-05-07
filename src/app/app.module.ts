@@ -9,6 +9,7 @@ import { SigninComponent } from './auth/signin/signin.component';
 import { AuthService } from './services/auth/auth.service';
 import { AuthGuardService } from './services/auth/auth-guard.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HeaderComponent } from './header/header.component';
 
 const appRoutes : Routes = [
   { path: 'signIn', component: SigninComponent},
@@ -19,7 +20,8 @@ const appRoutes : Routes = [
   declarations: [
     AppComponent,
     SignupComponent,
-    SigninComponent
+    SigninComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

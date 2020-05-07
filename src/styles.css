@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+
+.primary-color {
+    background:#40CB7C;
+}
+
+.second-color {
+    background: #404ACB
+}
+
+button:hover.second-color {
+    background: #408FCB;
+}
