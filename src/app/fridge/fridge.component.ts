@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AlimentService } from '../services/aliment.service';
 import { Aliment } from '../models/aliment.model';
 import { Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { AlimentFormComponent } from '../aliment-form/aliment-form.component';
 
 @Component({
   selector: 'app-fridge',
@@ -18,7 +20,8 @@ export class FridgeComponent implements OnInit {
   alimentsColLeft: Aliment[];
   alimentsColRight: Aliment[];
 
-  constructor(private alimentService: AlimentService) { }
+  constructor(private alimentService: AlimentService,
+              public dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -41,11 +44,17 @@ export class FridgeComponent implements OnInit {
   }
 
   showAliment() {
-    console.log(this.searchInput);
+    this.dialog.open(AlimentFormComponent, {
+      panelClass: 'custom-modalbox'
+    });
   }
 
   filter() {
     this.alimentService.filtersAliments(this.searchInput);
+  }
+
+  deleteAliment(aliment: Aliment) {
+    this.alimentService.deleteAliment(aliment);
   }
 
 }

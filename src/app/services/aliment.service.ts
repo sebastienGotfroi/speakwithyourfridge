@@ -105,8 +105,19 @@ export class AlimentService {
    }
 
    filtersAliments(searchName: string) {
-     const alimentFiltered = this.aliments.filter(aliment => aliment.name.includes(searchName));
+     const alimentFiltered = this.aliments.filter(aliment => aliment.name.toLowerCase().includes(searchName.toLocaleLowerCase()));
 
      this.emitAliments(alimentFiltered);
+   }
+
+   addAliment(aliment: Aliment) {
+     this.aliments.push(aliment);
+     this.emitAliments();
+   }
+
+   deleteAliment(aliment: Aliment) {
+     const index = this.aliments.indexOf(aliment);
+     this.aliments.splice(index,1);
+     this.emitAliments();
    }
 }

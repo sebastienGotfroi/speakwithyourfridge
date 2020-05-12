@@ -5,9 +5,17 @@
 }
 
 .second-color {
-    background: #404ACB
+    background: #404ACB;
 }
 
 button:hover.second-color {
     background: #408FCB;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.custom-modalbox >
+    mat-dialog-container {
+        background: #404ACB ;
+    }
+

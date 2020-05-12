@@ -13,6 +13,10 @@ import { HeaderComponent } from './header/header.component';
 import { FridgeComponent } from './fridge/fridge.component';
 import { AlimentService } from './services/aliment.service';
 import { AlimentFormComponent } from './aliment-form/aliment-form.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconRegistry, MatIconModule } from '@angular/material/icon'
+import {DomSanitizer} from '@angular/platform-browser';
 
 const appRoutes : Routes = [
   { path: 'signIn', component: SigninComponent},
@@ -35,9 +39,19 @@ const appRoutes : Routes = [
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes)
+    MatDialogModule,
+    RouterModule.forRoot(appRoutes),
+    BrowserAnimationsModule,
+    MatIconModule
+  ],
+  entryComponents: [
+    AlimentFormComponent
   ],
   providers: [AuthService, AuthGuardService, AlimentService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer){
+    matIconRegistry.addSvgIconSet(domSanitizer.bypassSecurityTrustResourceUrl('/assets/mdi.svg'));
+  }
+ }

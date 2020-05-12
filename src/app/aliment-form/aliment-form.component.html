@@ -1,1 +1,60 @@
-<p>aliment-form works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <h2>Add an aliment</h2>
+    </div>
+    <div class="row">
+        <form  [formGroup]="newAlimentForm" (ngSubmit)="onSaveAliment()">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" formControlName="name" class="form-control" [(ngModel)]="newAliment.name">
+                <div *ngIf="newAlimentForm.get('name').invalid && (newAlimentForm.get('name').dirty || newAlimentForm.get('name').touched)">
+                    <div *ngIf="newAlimentForm.get('name').errors.required" class="alert alert-danger">
+                        Name is required
+                    </div>
+                    <div *ngIf="newAlimentForm.get('name').errors.nameListExist" class="alert alert-danger">
+                        This name already exist
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="quantity">Quantity</label>
+                <input type="number" min="0" id="quantity" formControlName="quantity" class="form-control" [(ngModel)]="newAliment.quantity">
+                <div *ngIf="newAlimentForm.get('quantity').invalid && (newAlimentForm.get('quantity').dirty || newAlimentForm.get('quantity').touched)">
+                    <div *ngIf="newAlimentForm.get('quantity').errors.required" class="alert alert-danger">
+                        Quantity is required
+                    </div>
+                    <div *ngIf="newAlimentForm.get('quantity').errors.min" class="alert alert-danger">
+                        Need postitive number
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="maxQuantity">Max quantity that I want</label>
+                <input type="text" id="maxQuantity" formControlName="maxQuantity" class="form-control" [(ngModel)]="newAliment.maxQuantity">
+                <div *ngIf="newAlimentForm.get('maxQuantity').invalid && (newAlimentForm.get('maxQuantity').dirty || newAlimentForm.get('maxQuantity').touched)">
+                    <div class="alert alert-danger">
+                        Need postitive number
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="minQuantity">Min quantity that I need</label>
+                <input type="text" id="minQuantity" formControlName="minQuantity" class="form-control" [(ngModel)]="newAliment.minQuantity">
+                <div *ngIf="newAlimentForm.get('minQuantity').invalid && (newAlimentForm.get('minQuantity').dirty || newAlimentForm.get('minQuantity').touched)">
+                    <div class="alert alert-danger">
+                        Need postitive number
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="newAlimentForm.errors">
+                <div class="alert alert-danger">
+                    Max quantity has to be bigger than min quantity
+                </div>
+            </div>
+            <div class="btn-toolbar ">
+                <button class="btn btn-success primary-color text-white mr-1" type="submit" [disabled]="newAlimentForm.invalid">Add an aliment</button>
+                <button class="btn btn-success primary-color text-white" type="button" (click)="onClose()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
