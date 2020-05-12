@@ -10,10 +10,14 @@ import { AuthService } from './services/auth/auth.service';
 import { AuthGuardService } from './services/auth/auth-guard.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
+import { FridgeComponent } from './fridge/fridge.component';
+import { AlimentService } from './services/aliment.service';
 
 const appRoutes : Routes = [
   { path: 'signIn', component: SigninComponent},
-  { path: 'signUp', component: SignupComponent}
+  { path: 'signUp', component: SignupComponent},
+  { path: '', component: FridgeComponent},
+  { path: '**', component: FridgeComponent}
 ];
 
 @NgModule({
@@ -21,7 +25,8 @@ const appRoutes : Routes = [
     AppComponent,
     SignupComponent,
     SigninComponent,
-    HeaderComponent
+    HeaderComponent,
+    FridgeComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +35,7 @@ const appRoutes : Routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [AuthService, AuthGuardService],
+  providers: [AuthService, AuthGuardService, AlimentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
