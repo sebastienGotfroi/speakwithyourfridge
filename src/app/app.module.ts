@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { FridgeComponent } from './fridge/fridge.component';
 import { AlimentService } from './services/aliment.service';
+import { AlimentFormComponent } from './aliment-form/aliment-form.component';
 
 const appRoutes : Routes = [
   { path: 'signIn', component: SigninComponent},
@@ -26,7 +27,8 @@ const appRoutes : Routes = [
     SignupComponent,
     SigninComponent,
     HeaderComponent,
-    FridgeComponent
+    FridgeComponent,
+    AlimentFormComponent
   ],
   imports: [
     BrowserModule,

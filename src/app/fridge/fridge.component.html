@@ -1,15 +1,27 @@
 <div class="row">
+    <div class="form-group col-sm-12">
+        <label for="search">Search</label>
+        <input type="text" id="search" placeholder="Aliment" class="form-control" [(ngModel)]=searchInput (ngModelChange)="filter()">
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <button type="button" class="btn text-white primary-color">Add new aliment</button>
+    </div>
+</div>
+<div class="row">
     <div class="col-sm-6">
         <div *ngFor="let aliment of alimentsColLeft" class="form-group">
-            <label for="aliment.name">{{aliment.name}}</label>
-            <input type="number" [id]="aliment.name" [value]="aliment.quantity" class="form-control">
+            <label [className]="aliment.quantity < aliment.minQuantity ? 'text-danger' : 'text-secondary'" for="aliment.name">{{aliment.name}}</label>
+            <input type="number" min="0" [id]="aliment.name" [(ngModel)]="aliment.quantity" class="form-control">
         </div>
     </div>
     <div class="col-sm-6">
         <div *ngFor="let aliment of alimentsColRight" class="form-group">
-            <label for="aliment.name">{{aliment.name}}</label>
-            <input type="number" [id]="aliment.name" [value]="aliment.quantity" class="form-control">
+            <label [className]="aliment.quantity < aliment.minQuantity ? 'text-danger' : 'text-secondary'" for="aliment.name">{{aliment.name}}</label>
+            <input type="number" min="0" [id]="aliment.name" [(ngModel)]="aliment.quantity" class="form-control">
         </div>
     </div>
-    <button (click)="showAlliment()"></button>
+    <button (click)="showAliment()"></button>
 </div>
+

@@ -1,6 +1,13 @@
 
-<app-header></app-header>
-<img src="assets/img/Fridge-open.svg" class="my-3 mx-4 col-lg-4 float-right" alt="">
-<div class="container my-3 col-lg-8">
-<router-outlet></router-outlet>
+<app-header class="fixed-top"></app-header>
+<div class="container my-5">
+    <div class="row">
+        <div class="my-3 col-lg-8">
+            <router-outlet></router-outlet>
+        </div>
+        <div class="col-lg-4 float-right">
+            <img *ngIf="fridgeFull" src="assets/img/Fridge-open.svg" class="position-fixed my-4 mx-5 col-lg-4" alt="">
+            <img *ngIf="!fridgeFull" src="assets/img/AlanSpeak-Fridge-open.svg" class="position-fixed my-4 mx-5 col-lg-4" alt="">
+        </div>
+    </div>
 </div>

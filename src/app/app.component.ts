@@ -7,6 +7,8 @@ import * as firebase from 'firebase';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  fridgeFull = false;
   
   constructor() {
     var firebaseConfig = {

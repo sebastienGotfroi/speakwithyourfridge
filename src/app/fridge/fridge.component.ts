@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlimentService } from '../services/aliment.service';
 import { Aliment } from '../models/aliment.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-fridge',
@@ -9,7 +10,10 @@ import { Aliment } from '../models/aliment.model';
 })
 export class FridgeComponent implements OnInit {
 
+  alimentSubscription: Subscription;
+
   aliments: Aliment[];
+  searchInput: string;
 
   alimentsColLeft: Aliment[];
   alimentsColRight: Aliment[];
@@ -17,11 +21,17 @@ export class FridgeComponent implements OnInit {
   constructor(private alimentService: AlimentService) { }
 
   ngOnInit(): void {
-    this.initTabs();
+
+    this.alimentSubscription = this.alimentService.alimentSubject.subscribe(
+      (value:Aliment[]) => {
+        this.aliments = value;
+        this.initTabs();
+      }
+    );
+    this.alimentService.getAllAliments();
   }
 
   initTabs() {
-    this.aliments = this.alimentService.aliments;
 
     const numberOfAliments = this.aliments.length;
     const endFirstCol = Math.ceil(numberOfAliments/2)
@@ -30,8 +40,12 @@ export class FridgeComponent implements OnInit {
     this.alimentsColRight = this.aliments.slice(endFirstCol, numberOfAliments);
   }
 
-  showAlliment() {
-    console.log(this.aliments);
+  showAliment() {
+    console.log(this.searchInput);
+  }
+
+  filter() {
+    this.alimentService.filtersAliments(this.searchInput);
   }
 
 }
