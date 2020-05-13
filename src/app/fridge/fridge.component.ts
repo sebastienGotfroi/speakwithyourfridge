@@ -61,8 +61,8 @@ export class FridgeComponent implements OnInit, OnDestroy {
     this.alimentService.deleteAliment(aliment);
   }
 
-  save() {
-    this.alimentService.saveAliments();
+  save(aliment:Aliment) {
+    this.alimentService.modifyAliment(aliment);
   }
 
 }

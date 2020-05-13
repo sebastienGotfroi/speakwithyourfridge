@@ -63,6 +63,10 @@ export class AlimentService {
      this.saveAliments();
    }
 
+   modifyAliment(aliment: Aliment) {
+     this.saveAliments();
+   }
+
    saveAliments() {
      firebase.database().ref('/fridge/'+this.authService.uid).update(this.fridge).catch(
        (error) => {
