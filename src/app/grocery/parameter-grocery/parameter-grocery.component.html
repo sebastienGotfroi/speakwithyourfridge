@@ -7,7 +7,7 @@
         
         <ul class="listgroup col-sm-12">
         
-            <app-parameter-grocery-item *ngFor="let aliment of aliments; let i = index" [(aliment)]="aliments[i]" (alimentChange)="save()"><</app-parameter-grocery-item>
+            <app-parameter-grocery-item *ngFor="let aliment of copyAliments; let i = index" [(aliment)]="copyAliments[i]" (alimentChange)="save(copyAliments[i])"><</app-parameter-grocery-item>
         
         </ul>
     </div>

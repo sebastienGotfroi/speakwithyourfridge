@@ -19,15 +19,24 @@ import { MatIconRegistry, MatIconModule } from '@angular/material/icon'
 import {DomSanitizer} from '@angular/platform-browser';
 import { ParameterGroceryComponent } from './grocery/parameter-grocery/parameter-grocery.component';
 import { ParameterGroceryItemComponent } from './grocery/parameter-grocery/parameter-grocery-item/parameter-grocery-item.component';
+import { GroceryService } from './services/grocery.service';
+import { firebaseConfig} from 'src/environments/environment'
 
 const appRoutes : Routes = [
   { path: 'signIn', component: SigninComponent},
   { path: 'signUp', component: SignupComponent},
   { path: 'grocery/parameter', canActivate:[AuthGuardService], component: ParameterGroceryComponent},
+  { path: 'grocery/list', canActivate:[AuthGuardService], component: ListGroceryComponent},
   {path: 'fridge', canActivate:[AuthGuardService], component: FridgeComponent},
   { path: '', canActivate:[AuthGuardService], component: FridgeComponent},
   { path: '**', canActivate:[AuthGuardService], component: FridgeComponent}
 ];
+
+import * as firebase from 'firebase';
+import { ListGroceryComponent } from './grocery/list-grocery/list-grocery.component';
+
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
 
 @NgModule({
   declarations: [
@@ -38,7 +47,8 @@ const appRoutes : Routes = [
     FridgeComponent,
     AlimentFormComponent,
     ParameterGroceryComponent,
-    ParameterGroceryItemComponent
+    ParameterGroceryItemComponent,
+    ListGroceryComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +63,7 @@ const appRoutes : Routes = [
   entryComponents: [
     AlimentFormComponent
   ],
-  providers: [AuthService, AuthGuardService, AlimentService],
+  providers: [AuthService, AuthGuardService, AlimentService, GroceryService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

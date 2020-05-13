@@ -5,6 +5,7 @@ import * as firebase from 'firebase';
 import DataSnapshot = firebase.database.DataSnapshot;
 import { Fridge } from '../models/fridge.model';
 import { AuthService } from './auth/auth.service';
+import { GroceryService } from './grocery.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ import { AuthService } from './auth/auth.service';
 export class AlimentService {
 
   fridge: Fridge;
-  alimentSubject = new Subject<Aliment[]>();
+  alimentsSubject = new Subject<Aliment[]>();
+  alimentSubject = new Subject<Aliment>();
 
   constructor(private authService: AuthService) {
 
@@ -22,18 +24,26 @@ export class AlimentService {
       (isAuth) => {
         if(!isAuth) {
           this.fridge = new Fridge(new Array<Aliment>());
+        } else {
+          this.getAllAlimentsFromFirebase();
         }
       }
-    )
-     
+    );
    }
 
-
    emitAliments(aliments?: Aliment[]) {
-     this.alimentSubject.next(aliments? aliments :this.fridge.aliments);
+     this.alimentsSubject.next(aliments? aliments :this.fridge.aliments);
+   }
+
+   emitAliment(aliment: Aliment) {
+     this.alimentSubject.next(aliment);
    }
 
    getAllAliments() {
+     this.emitAliments();
+   }
+
+   getAllAlimentsFromFirebase() {
      firebase.database().ref('/fridge/'+this.authService.uid).on('value', (data: DataSnapshot) => {
       
       if(data.val()) {
@@ -43,28 +53,26 @@ export class AlimentService {
         }
       }
       this.emitAliments();
+      this.emitAliment(null);
      })
-   }
-
-   filtersAliments(searchName: string) {
-     const alimentFiltered = this.fridge.aliments.filter(aliment => aliment.name.toLowerCase().includes(searchName.toLocaleLowerCase()));
-
-     this.emitAliments(alimentFiltered);
    }
 
    addAliment(aliment: Aliment) {
      this.fridge.aliments.push(aliment);
+     this.emitAliment(aliment);
      this.saveAliments();
    }
 
    deleteAliment(aliment: Aliment) {
      const index = this.fridge.aliments.indexOf(aliment);
      this.fridge.aliments.splice(index,1);
+     this.emitAliment(null);
      this.saveAliments();
    }
 
    modifyAliment(aliment: Aliment) {
-     this.saveAliments();
+    this.emitAliment(aliment);
+    this.saveAliments();
    }
 
    saveAliments() {

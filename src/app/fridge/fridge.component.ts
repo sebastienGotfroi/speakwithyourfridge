@@ -15,6 +15,7 @@ export class FridgeComponent implements OnInit, OnDestroy {
   alimentSubscription: Subscription;
 
   aliments: Aliment[];
+  copyAliments: Aliment[];
   searchInput: string;
 
   alimentsColLeft: Aliment[];
@@ -25,9 +26,10 @@ export class FridgeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    this.alimentSubscription = this.alimentService.alimentSubject.subscribe(
+    this.alimentSubscription = this.alimentService.alimentsSubject.subscribe(
       (value:Aliment[]) => {
         this.aliments = value;
+        this.copyAliments = value;
         this.initTabs();
       }
     );
@@ -39,12 +41,12 @@ export class FridgeComponent implements OnInit, OnDestroy {
   }
 
   initTabs() {
-
-      const numberOfAliments = this.aliments.length;
+      this.filter();
+      const numberOfAliments = this.copyAliments.length;
       const endFirstCol = Math.ceil(numberOfAliments/2)
 
-      this.alimentsColLeft = this.aliments.slice(0, endFirstCol);
-      this.alimentsColRight = this.aliments.slice(endFirstCol, numberOfAliments);
+      this.alimentsColLeft = this.copyAliments.slice(0, endFirstCol);
+      this.alimentsColRight = this.copyAliments.slice(endFirstCol, numberOfAliments);
   }
 
   showAliment() {
@@ -53,8 +55,10 @@ export class FridgeComponent implements OnInit, OnDestroy {
     });
   }
 
-  filter() {
-    this.alimentService.filtersAliments(this.searchInput);
+  filter() {  
+    if(this.aliments && this.searchInput) {
+      this.copyAliments = this.aliments.filter(aliment => aliment.name.toLowerCase().includes(this.searchInput.toLocaleLowerCase()));   
+    }
   }
 
   deleteAliment(aliment: Aliment) {

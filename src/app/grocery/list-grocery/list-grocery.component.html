@@ -1,0 +1,16 @@
+<h2>Grocery list</h2>
+<div class="row">
+    <ul class="listgroup col-sm-12">
+        <li *ngFor="let aliment of groceryList; let i = index" class="list-group-item">
+            <h3>{{aliment.name}}</h3>
+            <div class="form-group">
+                <label class="text-secondary" for="quantity">Quantity in the fridge</label>
+                <input type="number" min="0" id="quantity" class="form-control" placeholder="" [(ngModel)]="groceryList[i].quantity">
+            </div>
+            <div class="form-group">
+                <label class="text-secondary" for="quantityToBuy">Quantity to buy</label>
+                <input type="number" min="0" id="quantityToBuy" class="form-control" placeholder="Quantity to buy" [(ngModel)]="groceryList[i].quantityToBuy">
+            </div>
+        </li>
+    </ul>
+</div>

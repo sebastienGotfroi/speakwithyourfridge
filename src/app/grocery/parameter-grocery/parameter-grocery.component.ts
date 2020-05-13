@@ -12,14 +12,19 @@ export class ParameterGroceryComponent implements OnInit, OnDestroy {
 
   alimentSubscription: Subscription;
   aliments: Aliment[];
+  copyAliments: Aliment[];
 
   searchInput: string;
 
   constructor(private alimentService: AlimentService) { }
 
   ngOnInit(): void {
-    this.alimentSubscription = this.alimentService.alimentSubject.subscribe(
-      (aliments: Aliment[]) => this.aliments = aliments
+    this.alimentSubscription = this.alimentService.alimentsSubject.subscribe(
+      (aliments: Aliment[]) => {
+        this.aliments = aliments;
+        this.copyAliments = aliments;
+        this.filter();
+      }
     );
     this.alimentService.getAllAliments();
   }
@@ -28,12 +33,14 @@ export class ParameterGroceryComponent implements OnInit, OnDestroy {
     this.alimentSubscription.unsubscribe();
   }
 
-  save() {
-    this.alimentService.saveAliments();
+  save(aliment: Aliment) {
+    this.alimentService.modifyAliment(aliment);
   }
 
   filter() {
-    this.alimentService.filtersAliments(this.searchInput);
+    if(this.aliments && this.searchInput) {
+      this.copyAliments = this.aliments.filter(aliment => aliment.name.toLowerCase().includes(this.searchInput.toLocaleLowerCase())); 
+    }
   }
 
 }

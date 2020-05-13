@@ -55,7 +55,7 @@ export class AlimentFormComponent implements OnInit, OnDestroy {
   }
 
   initAlimentList() {
-    this.alimentSubscription = this.alimentService.alimentSubject.subscribe(
+    this.alimentSubscription = this.alimentService.alimentsSubject.subscribe(
       (aliments) => {
         this.alimentList=aliments;
         this.newAlimentForm.controls['name'].setValidators([Validators.required, checkNameExistInput(this.alimentList)]);
