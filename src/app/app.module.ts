@@ -17,12 +17,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconRegistry, MatIconModule } from '@angular/material/icon'
 import {DomSanitizer} from '@angular/platform-browser';
+import { ParameterGroceryComponent } from './grocery/parameter-grocery/parameter-grocery.component';
 
 const appRoutes : Routes = [
   { path: 'signIn', component: SigninComponent},
   { path: 'signUp', component: SignupComponent},
-  { path: '', component: FridgeComponent},
-  { path: '**', component: FridgeComponent}
+  { path: 'grocery/parameter', canActivate:[AuthGuardService], component: ParameterGroceryComponent},
+  {path: 'fridge', canActivate:[AuthGuardService], component: FridgeComponent},
+  { path: '', canActivate:[AuthGuardService], component: FridgeComponent},
+  { path: '**', canActivate:[AuthGuardService], component: FridgeComponent}
 ];
 
 @NgModule({
@@ -32,7 +35,8 @@ const appRoutes : Routes = [
     SigninComponent,
     HeaderComponent,
     FridgeComponent,
-    AlimentFormComponent
+    AlimentFormComponent,
+    ParameterGroceryComponent
   ],
   imports: [
     BrowserModule,

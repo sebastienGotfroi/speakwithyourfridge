@@ -8,7 +8,7 @@ import * as firebase from 'firebase';
 })
 export class AppComponent {
 
-  fridgeFull = false;
+  fridgeFull = true;
   
   constructor() {
     var firebaseConfig = {

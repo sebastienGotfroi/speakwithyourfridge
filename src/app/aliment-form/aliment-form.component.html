@@ -30,7 +30,7 @@
             </div>
             <div class="form-group">
                 <label for="maxQuantity">Max quantity that I want</label>
-                <input type="text" id="maxQuantity" formControlName="maxQuantity" class="form-control" [(ngModel)]="newAliment.maxQuantity">
+                <input type="number" min="0" id="maxQuantity" formControlName="maxQuantity" class="form-control" [(ngModel)]="newAliment.maxQuantity">
                 <div *ngIf="newAlimentForm.get('maxQuantity').invalid && (newAlimentForm.get('maxQuantity').dirty || newAlimentForm.get('maxQuantity').touched)">
                     <div class="alert alert-danger">
                         Need postitive number
@@ -39,7 +39,7 @@
             </div>
             <div class="form-group">
                 <label for="minQuantity">Min quantity that I need</label>
-                <input type="text" id="minQuantity" formControlName="minQuantity" class="form-control" [(ngModel)]="newAliment.minQuantity">
+                <input type="number" min="0" id="minQuantity" formControlName="minQuantity" class="form-control" [(ngModel)]="newAliment.minQuantity">
                 <div *ngIf="newAlimentForm.get('minQuantity').invalid && (newAlimentForm.get('minQuantity').dirty || newAlimentForm.get('minQuantity').touched)">
                     <div class="alert alert-danger">
                         Need postitive number
