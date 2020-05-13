@@ -12,9 +12,9 @@
         <div *ngFor="let aliment of alimentsColLeft" class="form-group">
             <label [className]="aliment.quantity < aliment.minQuantity ? 'text-danger' : 'text-secondary'" for="aliment.name">{{aliment.name}}</label>
             <button class="btn btn-sm btn-outline-danger float-right" (click)="deleteAliment(aliment)">
-                <mat-icon [inline]="true">delete_outline</mat-icon> 
+                <mat-icon  [inline]="true">delete_outline</mat-icon> 
             </button>
-            <input type="number" min="0" [id]="aliment.name" [(ngModel)]="aliment.quantity" class="form-control">
+            <input type="number" min="0" [id]="aliment.name" [(ngModel)]="aliment.quantity" (change)="save()" class="form-control">
         </div>
     </div>
     <div class="col-sm-6">
@@ -22,7 +22,7 @@
             <label [className]="aliment.quantity < aliment.minQuantity ? 'text-danger' : 'text-secondary'" for="aliment.name">{{aliment.name}}</label>
             <button class="btn btn-sm btn-outline-danger float-right" (click)="deleteAliment(aliment)">
                 <mat-icon [inline]="true">delete_outline</mat-icon>            </button>
-            <input type="number" min="0" [id]="aliment.name" [(ngModel)]="aliment.quantity" class="form-control">
+            <input type="number" min="0" [id]="aliment.name" [(ngModel)]="aliment.quantity" (change)="save()" class="form-control">
         </div>
     </div>
 </div>

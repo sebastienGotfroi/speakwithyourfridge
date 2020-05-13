@@ -8,6 +8,7 @@ import { Observable, Subject } from 'rxjs';
 })
 export class AuthService {
 
+  uid: string;
   isAuth: boolean;
   authSubject = new  Subject<boolean>();
 
@@ -24,8 +25,10 @@ export class AuthService {
       (user) => {
         if(user) {
           this.isAuth = true; 
+          this.uid = user.uid;
         } else {
           this.isAuth = false;
+          this.uid = undefined;     
         }
         console.log("sign In Change");
         this.emitAuthStateChanged();

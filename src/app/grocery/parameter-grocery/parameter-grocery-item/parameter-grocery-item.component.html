@@ -1,0 +1,23 @@
+<li class="list-group-item">
+    <h3>{{aliment.name}}</h3>
+    <div class="form-group">
+        <label class="text-secondary" for="maxQuantity">Max quantity</label>
+        <input type="number" min="0" id="maxQuantity" class="form-control" placeholder="Max quantity" (change)="updateValue()" [(ngModel)]="copyAliment.maxQuantity">
+    </div>
+    <div class="form-group">
+        <label class="text-secondary" for="minQuantiy"> Min quantity</label>
+        <input type="number" min="0" id="minQuantity" class="form-control" placeholder="Min quantity" (change)="updateValue()" [(ngModel)]="copyAliment.minQuantity">
+    </div>
+
+    <div class="alert alert-danger" *ngIf="errors">
+        <div *ngIf="this.errors.minQuantityRequired">
+            Min quantity required
+        </div>
+        <div *ngIf="this.errors.maxQuantityRequired">
+            Max quantity required
+        </div>
+        <div *ngIf="this.errors.maxQuantityLowerThanMinQuantity">
+            Max quantity has to be higher than min quantity
+        </div>
+    </div>
+</li>

@@ -1,1 +1,14 @@
-<p>parameter-grocery works!</p>
+<div class="container">
+    <h2>Paramaters of your grocery</h2>
+    <div class="row mx-auto my-2 w-100">
+            <input type="text" id="search" placeholder="Search Aliment" class="form-control" [(ngModel)]=searchInput (ngModelChange)="filter()">
+    </div>
+    <div class="row">
+        
+        <ul class="listgroup col-sm-12">
+        
+            <app-parameter-grocery-item *ngFor="let aliment of aliments; let i = index" [(aliment)]="aliments[i]" (alimentChange)="save()"><</app-parameter-grocery-item>
+        
+        </ul>
+    </div>
+</div>

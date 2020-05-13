@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AlimentService } from '../services/aliment.service';
 import { Aliment } from '../models/aliment.model';
 import { Subscription } from 'rxjs';
@@ -10,7 +10,7 @@ import { AlimentFormComponent } from '../aliment-form/aliment-form.component';
   templateUrl: './fridge.component.html',
   styleUrls: ['./fridge.component.css']
 })
-export class FridgeComponent implements OnInit {
+export class FridgeComponent implements OnInit, OnDestroy {
 
   alimentSubscription: Subscription;
 
@@ -34,13 +34,17 @@ export class FridgeComponent implements OnInit {
     this.alimentService.getAllAliments();
   }
 
+  ngOnDestroy(): void {
+    this.alimentSubscription.unsubscribe();
+  }
+
   initTabs() {
 
-    const numberOfAliments = this.aliments.length;
-    const endFirstCol = Math.ceil(numberOfAliments/2)
+      const numberOfAliments = this.aliments.length;
+      const endFirstCol = Math.ceil(numberOfAliments/2)
 
-    this.alimentsColLeft = this.aliments.slice(0, endFirstCol);
-    this.alimentsColRight = this.aliments.slice(endFirstCol, numberOfAliments);
+      this.alimentsColLeft = this.aliments.slice(0, endFirstCol);
+      this.alimentsColRight = this.aliments.slice(endFirstCol, numberOfAliments);
   }
 
   showAliment() {
@@ -55,6 +59,10 @@ export class FridgeComponent implements OnInit {
 
   deleteAliment(aliment: Aliment) {
     this.alimentService.deleteAliment(aliment);
+  }
+
+  save() {
+    this.alimentService.saveAliments();
   }
 
 }

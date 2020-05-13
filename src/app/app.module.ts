@@ -18,6 +18,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconRegistry, MatIconModule } from '@angular/material/icon'
 import {DomSanitizer} from '@angular/platform-browser';
 import { ParameterGroceryComponent } from './grocery/parameter-grocery/parameter-grocery.component';
+import { ParameterGroceryItemComponent } from './grocery/parameter-grocery/parameter-grocery-item/parameter-grocery-item.component';
 
 const appRoutes : Routes = [
   { path: 'signIn', component: SigninComponent},
@@ -36,7 +37,8 @@ const appRoutes : Routes = [
     HeaderComponent,
     FridgeComponent,
     AlimentFormComponent,
-    ParameterGroceryComponent
+    ParameterGroceryComponent,
+    ParameterGroceryItemComponent
   ],
   imports: [
     BrowserModule,

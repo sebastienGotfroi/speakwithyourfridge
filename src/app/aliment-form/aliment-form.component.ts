@@ -63,8 +63,6 @@ export class AlimentFormComponent implements OnInit, OnDestroy {
     );
     this.alimentService.getAllAliments();
   }
-
-  
 }
 export function checkNameExistInput(nameList: Aliment[]): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } => {
@@ -78,5 +76,7 @@ export const minQuantityLowerThanMaxQuantity: ValidatorFn = (control: FormGroup)
     const minQuantity: number = +control.get('minQuantity').value;
     const maxQuantity: number = +control.get('maxQuantity').value;
 
-    return minQuantity > maxQuantity ? {'minQuantityBiggerThanMaxQuantity': true} : null; 
+    return (minQuantity > 0 || maxQuantity > 0) && minQuantity >= maxQuantity ? {'minQuantityBiggerThanMaxQuantity': true} : null; 
   }
+
+
