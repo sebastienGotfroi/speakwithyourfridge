@@ -12,10 +12,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { FridgeComponent } from './fridge/fridge.component';
 import { AlimentService } from './services/aliment.service';
-import { AlimentFormComponent } from './aliment-form/aliment-form.component';
+import { AlimentFormComponent } from './fridge/aliment-form/aliment-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatIconRegistry, MatIconModule } from '@angular/material/icon'
+import { MatIconRegistry, MatIconModule } from '@angular/material/icon';
+import { MatAutocompleteModule } from'@angular/material/autocomplete';
+import { MatInputModule } from'@angular/material/input';
 import {DomSanitizer} from '@angular/platform-browser';
 import { ParameterGroceryComponent } from './grocery/parameter-grocery/parameter-grocery.component';
 import { ParameterGroceryItemComponent } from './grocery/parameter-grocery/parameter-grocery-item/parameter-grocery-item.component';
@@ -34,6 +36,8 @@ const appRoutes : Routes = [
 
 import * as firebase from 'firebase';
 import { ListGroceryComponent } from './grocery/list-grocery/list-grocery.component';
+import { AddFormComponent } from './grocery/list-grocery/add-form/add-form.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
@@ -48,7 +52,8 @@ firebase.analytics();
     AlimentFormComponent,
     ParameterGroceryComponent,
     ParameterGroceryItemComponent,
-    ListGroceryComponent
+    ListGroceryComponent,
+    AddFormComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +63,10 @@ firebase.analytics();
     MatDialogModule,
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,
-    MatIconModule
+    MatIconModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   entryComponents: [
     AlimentFormComponent

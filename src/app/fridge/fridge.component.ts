@@ -3,7 +3,7 @@ import { AlimentService } from '../services/aliment.service';
 import { Aliment } from '../models/aliment.model';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { AlimentFormComponent } from '../aliment-form/aliment-form.component';
+import { AlimentFormComponent } from './aliment-form/aliment-form.component';
 
 @Component({
   selector: 'app-fridge',
@@ -56,7 +56,7 @@ export class FridgeComponent implements OnInit, OnDestroy {
   }
 
   filter() {  
-    if(this.aliments && this.searchInput) {
+    if(this.aliments && this.searchInput !== undefined) {
       this.copyAliments = this.aliments.filter(aliment => aliment.name.toLowerCase().includes(this.searchInput.toLocaleLowerCase()));   
     }
   }

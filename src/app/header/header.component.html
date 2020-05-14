@@ -1,11 +1,11 @@
 <nav class="navbar navbar-expand navbar-light primary-color">
     <div class="container">
-        <ul class="nav navbar-nav col-sm-4 justify-content-start">
+        <ul class="nav navbar-nav col-xs-4 justify-content-start">
             <li routerLinkActive="active" class="nav-item">
                 <a class="nav-link disabled" href="#">Speak With Your Fridge</a>
             </li>
         </ul>
-        <ul class="nav navbar-nav col-sm-4 justify-content-center">
+        <ul class="nav navbar-nav col-xs-4 justify-content-center">
             <li class="nav-item">
                 <a class="nav-link" routerLink="/fridge">Home</a>
             </li>
@@ -16,7 +16,7 @@
                 <a routerLink="/grocery/parameter" class="nav-link" href="#">Grocery parameter</a>
             </li>
         </ul>
-        <div class="nav navbar-nav col-sm-4 justify-content-end">
+        <div class="nav navbar-nav col-xs-4 justify-content-end">
             <button *ngIf="!isAuth" routerLink="signIn" class="btn text-light second-color mr-2">SignIn</button>
             <button *ngIf="!isAuth" routerLink="signUp" class="btn text-light second-color">SignUp</button>
             <button *ngIf="isAuth" class="btn text-light second-color" (click)="signOut()">Sign Out</button>

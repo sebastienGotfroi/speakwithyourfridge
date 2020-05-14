@@ -1,15 +1,37 @@
 <h2>Grocery list</h2>
 <div class="row">
+    <div class="col-sm-6">
+        <button class="btn text-white primary-color" (click)="showAddModal()">
+            Add aliment in the list
+        </button>
+    </div>
+    <div class="col-sm-6">
+        <button class="btn text-white primary-color" (click)="fillTheFridge()">
+            Fill the fridge with all the list
+        </button>
+    </div>
+</div>
+<div class="row mx-auto my-2 w-100">
+    <input type="text" id="search" placeholder="Search Aliment" class="form-control" [(ngModel)]=searchInput (ngModelChange)="filter()">
+</div>
+<div class="row my-2">
     <ul class="listgroup col-sm-12">
-        <li *ngFor="let aliment of groceryList; let i = index" class="list-group-item">
-            <h3>{{aliment.name}}</h3>
+        <li *ngFor="let aliment of copyAliments; let i = index" class="list-group-item">
+            <div class="row">
+                <h3 class="col-sm-6">{{aliment.name}}</h3>
+                <div class="col-sm-6">
+                    <button class="btn btn-sm text-white primary-color float-right" (click)="fillTheFridgeWithOneAliment(groceryList[i])">
+                        Add {{aliment.quantityToBuy}} {{aliment.name}} to the fridge
+                    </button>
+                </div>
+            </div>
             <div class="form-group">
                 <label class="text-secondary" for="quantity">Quantity in the fridge</label>
-                <input type="number" min="0" id="quantity" class="form-control" placeholder="" [(ngModel)]="groceryList[i].quantity">
+                <input type="number" min="0" id="quantity" class="form-control" placeholder="" [(ngModel)]="groceryList[i].quantity" (change)="quantityChange(groceryList[i])">
             </div>
             <div class="form-group">
                 <label class="text-secondary" for="quantityToBuy">Quantity to buy</label>
-                <input type="number" min="0" id="quantityToBuy" class="form-control" placeholder="Quantity to buy" [(ngModel)]="groceryList[i].quantityToBuy">
+                <input type="number" min="0" id="quantityToBuy" class="form-control" placeholder="Quantity to buy" [(ngModel)]="groceryList[i].quantityToBuy" (change)="quantityToBuyChange(groceryList[i])">
             </div>
         </li>
     </ul>

@@ -38,7 +38,7 @@ export class ParameterGroceryComponent implements OnInit, OnDestroy {
   }
 
   filter() {
-    if(this.aliments && this.searchInput) {
+    if(this.aliments && this.searchInput !== undefined) {
       this.copyAliments = this.aliments.filter(aliment => aliment.name.toLowerCase().includes(this.searchInput.toLocaleLowerCase())); 
     }
   }

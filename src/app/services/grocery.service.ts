@@ -12,16 +12,7 @@ export class GroceryService {
 
   isFullSubject = new Subject<boolean>();
 
-  constructor(private alimentService:AlimentService) { 
-    this.alimentService.alimentSubject.subscribe(
-      (aliment:Aliment) => {
-        if(aliment) {
-          this.calculateQuantityToBuy(aliment);
-        }
-        this.calculateFridgeFull();
-      }
-    )
-  }
+  constructor() {}
 
   emitIsFull() {
     this.isFullSubject.next(this.isFull);
@@ -31,11 +22,14 @@ export class GroceryService {
     const quantity = aliment.quantity;
     const maxQuantity = aliment.maxQuantity;
     const minQuantity = aliment.minQuantity;
-
-    if(quantity <= minQuantity) {
-      aliment.quantityToBuy = maxQuantity - quantity;
-    } else {
-      aliment.quantityToBuy = 0;
+    const quantityToBuyChangeByUser = aliment.quantityToBuyChangeByUser;
+    
+    if(!quantityToBuyChangeByUser) {
+      if( quantity <= minQuantity) {
+        aliment.quantityToBuy = maxQuantity - quantity;
+      } else {
+        aliment.quantityToBuy = 0;
+      }
     }
   }
 
@@ -44,8 +38,8 @@ export class GroceryService {
       return aliments.filter(aliment => aliment.quantityToBuy > 0).length > 0 ? false : true;
     }
   }
-  calculateFridgeFull() {
-    this.isFull = this.fridgeIsFull(this.alimentService.fridge.aliments);
+  calculateFridgeFull(aliments: Aliment[]) {
+    this.isFull = this.fridgeIsFull(aliments);
     this.emitIsFull();
   }
 }

@@ -16,7 +16,8 @@ export class AlimentService {
   alimentsSubject = new Subject<Aliment[]>();
   alimentSubject = new Subject<Aliment>();
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService,
+              private groceryService: GroceryService) {
 
     this.fridge = new Fridge(new Array<Aliment>());
 
@@ -35,10 +36,6 @@ export class AlimentService {
      this.alimentsSubject.next(aliments? aliments :this.fridge.aliments);
    }
 
-   emitAliment(aliment: Aliment) {
-     this.alimentSubject.next(aliment);
-   }
-
    getAllAliments() {
      this.emitAliments();
    }
@@ -53,25 +50,24 @@ export class AlimentService {
         }
       }
       this.emitAliments();
-      this.emitAliment(null);
      })
    }
 
    addAliment(aliment: Aliment) {
      this.fridge.aliments.push(aliment);
-     this.emitAliment(aliment);
+     this.calculateGroceryList(aliment);
      this.saveAliments();
    }
 
    deleteAliment(aliment: Aliment) {
      const index = this.fridge.aliments.indexOf(aliment);
      this.fridge.aliments.splice(index,1);
-     this.emitAliment(null);
+     this.calculateGroceryList(aliment);
      this.saveAliments();
    }
 
    modifyAliment(aliment: Aliment) {
-    this.emitAliment(aliment);
+    this.calculateGroceryList(aliment);
     this.saveAliments();
    }
 
@@ -84,4 +80,34 @@ export class AlimentService {
        () => this.emitAliments()
      );
    }
+
+   calculateGroceryList(aliment?: Aliment) {
+    if(aliment) {
+      this.groceryService.calculateQuantityToBuy(aliment);
+    }
+    this.groceryService.calculateFridgeFull(this.fridge.aliments);
+   }
+
+   fillTheFridgeWithAllTheListAndSave() {
+     this.fridge.aliments.forEach(
+       (aliment) => {
+         this.fillTheFridge(aliment);
+       }
+     );
+     this.calculateGroceryList();
+     this.saveAliments();
+   }
+
+   fillTheFridgeWithOneElementAndSave(aliment: Aliment) {
+     this.fillTheFridge(aliment);
+     this.saveAliments();
+    }
+    
+    fillTheFridge(aliment: Aliment) {
+      aliment.quantity = aliment.quantity + aliment.quantityToBuy;
+      aliment.quantityToBuyChangeByUser = false;
+      this.groceryService.calculateQuantityToBuy(aliment);
+      this.calculateGroceryList();
+   }
+
 }

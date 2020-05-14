@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AlimentService } from '../services/aliment.service';
-import { Aliment } from '../models/aliment.model';
+import { AlimentService } from '../../services/aliment.service';
+import { Aliment } from '../../models/aliment.model';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, FormBuilder, Validators, NgModel, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Subscription } from 'rxjs';
