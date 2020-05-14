@@ -11,10 +11,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   isAuth:boolean;
   isAuthSubscription: Subscription;
+  isCollapsed: boolean;
 
   constructor(private authService: AuthService) { }
   
   ngOnInit(): void {
+    this.isCollapsed = true; 
     this.isAuthSubscription = this.authService.authSubject.subscribe(
       (value) => {
         this.isAuth = value;

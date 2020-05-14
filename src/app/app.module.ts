@@ -23,6 +23,11 @@ import { ParameterGroceryComponent } from './grocery/parameter-grocery/parameter
 import { ParameterGroceryItemComponent } from './grocery/parameter-grocery/parameter-grocery-item/parameter-grocery-item.component';
 import { GroceryService } from './services/grocery.service';
 import { firebaseConfig} from 'src/environments/environment'
+import * as firebase from 'firebase';
+import { ListGroceryComponent } from './grocery/list-grocery/list-grocery.component';
+import { AddFormComponent } from './grocery/list-grocery/add-form/add-form.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const appRoutes : Routes = [
   { path: 'signIn', component: SigninComponent},
@@ -34,10 +39,6 @@ const appRoutes : Routes = [
   { path: '**', canActivate:[AuthGuardService], component: FridgeComponent}
 ];
 
-import * as firebase from 'firebase';
-import { ListGroceryComponent } from './grocery/list-grocery/list-grocery.component';
-import { AddFormComponent } from './grocery/list-grocery/add-form/add-form.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
 
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
@@ -66,7 +67,8 @@ firebase.analytics();
     MatIconModule,
     MatAutocompleteModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    NgbModule
   ],
   entryComponents: [
     AlimentFormComponent
