@@ -15,9 +15,10 @@ export class GroceryService {
     const maxQuantity = aliment.maxQuantity;
     const minQuantity = aliment.minQuantity;
     const quantityToBuyChangeByUser = aliment.quantityToBuyChangeByUser;
+    const isAutomatic = aliment.isAutomatic;
 
     if(!quantityToBuyChangeByUser) {
-      if( quantity <= minQuantity && maxQuantity !== 0) {
+      if(isAutomatic && maxQuantity !== 0 && quantity <= minQuantity) {
         aliment.quantityToBuy = maxQuantity - quantity;
       } else {
         aliment.quantityToBuy = 0;

@@ -1,5 +1,12 @@
 <li class="list-group-item">
     <h3>{{aliment.name}}</h3>
+    <mat-checkbox [(ngModel)]="copyAliment.isAutomatic" (ngModelChange)="updateValue()">
+        <div class="text-wrap">
+            J'ajoute cet aliment automatiquement dans ma liste
+            <mat-icon class="ml-1" [inline]="true" matTooltip="Si la case est coché, l'aliment va être ajouté automatiquement dans la liste de course en fonction d'un maximum et minimum" matTooltipPosition="right">info</mat-icon> 
+        </div> 
+    </mat-checkbox>
+     
     <div class="form-group">
         <label class="text-secondary" for="maxQuantity">Max quantity</label>
         <input type="number" min="0" id="maxQuantity" class="form-control" placeholder="Max quantity" (change)="updateValue()" [(ngModel)]="copyAliment.maxQuantity">

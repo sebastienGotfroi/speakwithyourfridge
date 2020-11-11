@@ -21,6 +21,7 @@ export class ParameterGroceryItemComponent implements OnInit, OnChanges {
     this.copyAliment = new Aliment(this.aliment.name, this.aliment.quantity);
     this.copyAliment.maxQuantity = this.aliment.maxQuantity;
     this.copyAliment.minQuantity = this.aliment.minQuantity;
+    this.copyAliment.isAutomatic = this.aliment.isAutomatic !== undefined ? this.aliment.isAutomatic : true;
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -29,6 +30,7 @@ export class ParameterGroceryItemComponent implements OnInit, OnChanges {
       this.copyAliment.quantity = changes.aliment.currentValue['quantity'];
       this.copyAliment.maxQuantity = changes.aliment.currentValue['maxQuantity'];
       this.copyAliment.minQuantity = changes.aliment.currentValue['minQuantity'];
+      this.copyAliment.isAutomatic = changes.aliment.currentValue['isAutomatic'];
     }
   }
 
@@ -60,6 +62,7 @@ export class ParameterGroceryItemComponent implements OnInit, OnChanges {
     if(this.validateQuantity()) {
       this.aliment.maxQuantity = this.copyAliment.maxQuantity;
       this.aliment.minQuantity = this.copyAliment.minQuantity;
+      this.aliment.isAutomatic = this.copyAliment.isAutomatic;
 
       this.alimentChange.emit(this.aliment);
     }

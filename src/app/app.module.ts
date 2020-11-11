@@ -28,6 +28,7 @@ import { ListGroceryComponent } from './grocery/list-grocery/list-grocery.compon
 import { AddFormComponent } from './grocery/list-grocery/add-form/add-form.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const appRoutes : Routes = [
@@ -69,6 +70,7 @@ firebase.analytics();
     MatAutocompleteModule,
     MatFormFieldModule,
     MatTooltipModule,
+    MatCheckboxModule,
     MatInputModule,
     NgbModule
   ],

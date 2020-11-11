@@ -47,6 +47,7 @@ export class AlimentFormComponent implements OnInit, OnDestroy {
     this.newAlimentForm = this.formBuilder.group({
       name: ['', [Validators.required, , checkNameExistInput(this.alimentList)]],
       quantity: ['', [Validators.required, Validators.min(0)]],
+      isAutomatic: ['', [Validators.required]],
       maxQuantity: ['', Validators.min(0)],
       minQuantity: ['', Validators.min(0)]
     }, {

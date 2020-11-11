@@ -7,7 +7,7 @@
             <div class="form-group">
                 <label for="name">Nom</label>
                 <mat-icon class="ml-1" [inline]="true" matTooltip="Nom de l'aliment" matTooltipPosition="right">info</mat-icon> 
-                <input type="text" id="name" name="name" formControlName="name" class="form-control" [(ngModel)]="newAliment.name">
+                <input type="text" id="name" name="name" formControlName="name" class="form-control col-xs-12" [(ngModel)]="newAliment.name">
                 <div *ngIf="newAlimentForm.get('name').invalid && (newAlimentForm.get('name').dirty || newAlimentForm.get('name').touched)">
                     <div *ngIf="newAlimentForm.get('name').errors.required" class="alert alert-danger">
                         Tu as oublié de mettre un nom
@@ -32,30 +32,42 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="maxQuantity">Quantité maximum</label>
-                <mat-icon class="ml-1" [inline]="true" matTooltip="En mode automatique, la quantité maximum que je veux dans mon frigo" matTooltipPosition="right">info</mat-icon> 
-                <input type="number" min="0" id="maxQuantity" formControlName="maxQuantity" class="form-control" [(ngModel)]="newAliment.maxQuantity">
-                <div *ngIf="newAlimentForm.get('maxQuantity').invalid">
-                    <div *ngIf="newAlimentForm.get('maxQuantity').errors.min" class="alert alert-danger">
-                        La quantité doit être positive
+                <mat-checkbox formControlName="isAutomatic" [(ngModel)]="newAliment.isAutomatic">
+                    <div class="text-wrap">
+                        J'ajoute cet aliment automatiquement dans ma liste
+                        <mat-icon class="ml-1" [inline]="true" matTooltip="Si la case est coché, l'aliment va être ajouté automatiquement dans la liste de course en fonction d'un maximum et minimum" matTooltipPosition="right">info</mat-icon> 
+                    </div>
+                </mat-checkbox>
+            </div>
+            <div *ngIf="newAliment.isAutomatic">
+                <div class="form-group">
+                    <label for="maxQuantity">Quantité maximum</label>
+                    <mat-icon class="ml-1" [inline]="true" matTooltip="En mode automatique, la quantité maximum que je veux dans mon frigo" matTooltipPosition="right">info</mat-icon> 
+                    <input type="number" min="0" id="maxQuantity" formControlName="maxQuantity" class="form-control" [(ngModel)]="newAliment.maxQuantity">
+                    <div *ngIf="newAlimentForm.get('maxQuantity').invalid">
+                        <div *ngIf="newAlimentForm.get('maxQuantity').errors.min" class="alert alert-danger">
+                            La quantité doit être positive
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="minQuantity">Quantité minium</label>
-                <mat-icon class="ml-1" [inline]="true" matTooltip="En mode automatique, à partir de quelle quantité l'aliment s'ajoute à la liste de course" matTooltipPosition="right">info</mat-icon> 
-                <input type="number" min="0" id="minQuantity" formControlName="minQuantity" class="form-control" [(ngModel)]="newAliment.minQuantity">
-                <div *ngIf="newAlimentForm.get('minQuantity').invalid">
-                    <div *ngIf="newAlimentForm.get('minQuantity').errors.min" class="alert alert-danger">
-                        La quantité doit être positive
+                <div class="form-group">
+                    <label for="minQuantity">Quantité minium</label>
+                    <mat-icon class="ml-1" [inline]="true" matTooltip="En mode automatique, à partir de quelle quantité l'aliment s'ajoute à la liste de course" matTooltipPosition="right">info</mat-icon> 
+                    <input type="number" min="0" id="minQuantity" formControlName="minQuantity" class="form-control" [(ngModel)]="newAliment.minQuantity">
+                    <div *ngIf="newAlimentForm.get('minQuantity').invalid">
+                        <div *ngIf="newAlimentForm.get('minQuantity').errors.min" class="alert alert-danger">
+                            La quantité doit être positive
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div *ngIf="newAlimentForm.errors">
-                <div class="alert alert-danger">
-                    La quantité maximum doit être plus grande que la quantité minimum
+                <div *ngIf="newAlimentForm.errors">
+                    <div class="alert alert-danger">
+                        La quantité maximum doit être plus grande que la quantité minimum
+                    </div>
                 </div>
+
             </div>
+            
             <div class="btn-toolbar ">
                 <button *ngIf="newAliment.name" class="btn btn-success primary-color text-white mr-1" type="submit" [disabled]="newAlimentForm.invalid">Ajouter : {{newAliment.name}}</button>
                 <button *ngIf="!newAliment.name" class="btn btn-success primary-color text-white mr-1" type="submit" [disabled]="newAlimentForm.invalid">Ajouter</button>
