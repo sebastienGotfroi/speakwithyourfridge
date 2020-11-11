@@ -12,19 +12,13 @@ import { Subscription } from 'rxjs';
 export class AppComponent implements OnInit, OnDestroy {
 
   fridgeFull: boolean;
-  isFullSubscription: Subscription;
   constructor(private groceryService:GroceryService,
               private alimentService: AlimentService) {
   }
 
   ngOnInit(): void {
-
-    this.isFullSubscription = this.groceryService.isFullSubject.subscribe(
-      (isFull: boolean) => this.fridgeFull = isFull
-    );
   }
 
   ngOnDestroy(): void {
-    this.isFullSubscription.unsubscribe();
   }
 }

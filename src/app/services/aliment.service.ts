@@ -85,7 +85,6 @@ export class AlimentService {
     if(aliment) {
       this.groceryService.calculateQuantityToBuy(aliment);
     }
-    this.groceryService.calculateFridgeFull(this.fridge.aliments);
    }
 
    fillTheFridgeWithAllTheListAndSave() {

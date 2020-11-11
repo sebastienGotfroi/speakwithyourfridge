@@ -8,15 +8,7 @@ import { Subject } from 'rxjs';
 })
 export class GroceryService {
 
-  isFull: boolean;
-
-  isFullSubject = new Subject<boolean>();
-
   constructor() {}
-
-  emitIsFull() {
-    this.isFullSubject.next(this.isFull);
-  }
 
   calculateQuantityToBuy(aliment: Aliment) {
     const quantity = aliment.quantity;
@@ -25,7 +17,7 @@ export class GroceryService {
     const quantityToBuyChangeByUser = aliment.quantityToBuyChangeByUser;
 
     if(!quantityToBuyChangeByUser) {
-      if( quantity <= minQuantity) {
+      if( quantity <= minQuantity && maxQuantity !== 0) {
         aliment.quantityToBuy = maxQuantity - quantity;
       } else {
         aliment.quantityToBuy = 0;
@@ -37,9 +29,5 @@ export class GroceryService {
     if(aliments) {
       return aliments.filter(aliment => aliment.quantityToBuy > 0).length > 0 ? false : true;
     }
-  }
-  calculateFridgeFull(aliments: Aliment[]) {
-    this.isFull = this.fridgeIsFull(aliments);
-    this.emitIsFull();
   }
 }
