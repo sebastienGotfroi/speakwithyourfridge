@@ -1,60 +1,65 @@
 <div class="container-fluid">
     <div class="row">
-        <h2>Add an aliment {{newAliment.name}}</h2>
+        <h2>Ajouter un aliment {{newAliment.name}}</h2>
     </div>
     <div class="row">
         <form  [formGroup]="newAlimentForm" (ngSubmit)="onSaveAliment()">
             <div class="form-group">
-                <label for="name">Name</label>
+                <label for="name">Nom</label>
+                <mat-icon class="ml-1" [inline]="true" matTooltip="Nom de l'aliment" matTooltipPosition="right">info</mat-icon> 
                 <input type="text" id="name" name="name" formControlName="name" class="form-control" [(ngModel)]="newAliment.name">
                 <div *ngIf="newAlimentForm.get('name').invalid && (newAlimentForm.get('name').dirty || newAlimentForm.get('name').touched)">
                     <div *ngIf="newAlimentForm.get('name').errors.required" class="alert alert-danger">
-                        Name is required
+                        Tu as oublié de mettre un nom
                     </div>
                     <div *ngIf="newAlimentForm.get('name').errors.nameListExist" class="alert alert-danger">
-                        This name already exist
+                        Ce nom est déjà utlisé par un autre aliment
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <label for="quantity">Quantity</label>
+                <label for="quantity">Quantité</label>
+                <mat-icon class="ml-1" [inline]="true" matTooltip="Quantité qu'il y a déjà dans mon frigo" matTooltipPosition="right">info</mat-icon> 
                 <input type="number" min="0" id="quantity" formControlName="quantity" class="form-control" [(ngModel)]="newAliment.quantity">
                 <div *ngIf="newAlimentForm.get('quantity').invalid && (newAlimentForm.get('quantity').dirty || newAlimentForm.get('quantity').touched)">
                     <div *ngIf="newAlimentForm.get('quantity').errors.required" class="alert alert-danger">
-                        Quantity is required
+                        Tu dois mettre une quantité
                     </div>
                     <div *ngIf="newAlimentForm.get('quantity').errors.min" class="alert alert-danger">
-                        Need postitive number
+                        La quantité doit être positive
                     </div>
 
                 </div>
             </div>
             <div class="form-group">
-                <label for="maxQuantity">Max quantity that I want</label>
+                <label for="maxQuantity">Quantité maximum</label>
+                <mat-icon class="ml-1" [inline]="true" matTooltip="En mode automatique, la quantité maximum que je veux dans mon frigo" matTooltipPosition="right">info</mat-icon> 
                 <input type="number" min="0" id="maxQuantity" formControlName="maxQuantity" class="form-control" [(ngModel)]="newAliment.maxQuantity">
                 <div *ngIf="newAlimentForm.get('maxQuantity').invalid">
                     <div *ngIf="newAlimentForm.get('maxQuantity').errors.min" class="alert alert-danger">
-                        Need postitive number
+                        La quantité doit être positive
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <label for="minQuantity">Min quantity that I need</label>
+                <label for="minQuantity">Quantité minium</label>
+                <mat-icon class="ml-1" [inline]="true" matTooltip="En mode automatique, à partir de quelle quantité l'aliment s'ajoute à la liste de course" matTooltipPosition="right">info</mat-icon> 
                 <input type="number" min="0" id="minQuantity" formControlName="minQuantity" class="form-control" [(ngModel)]="newAliment.minQuantity">
                 <div *ngIf="newAlimentForm.get('minQuantity').invalid">
                     <div *ngIf="newAlimentForm.get('minQuantity').errors.min" class="alert alert-danger">
-                        Need postitive number
+                        La quantité doit être positive
                     </div>
                 </div>
             </div>
             <div *ngIf="newAlimentForm.errors">
                 <div class="alert alert-danger">
-                    Max quantity has to be bigger than min quantity
+                    La quantité maximum doit être plus grande que la quantité minimum
                 </div>
             </div>
             <div class="btn-toolbar ">
-                <button class="btn btn-success primary-color text-white mr-1" type="submit" [disabled]="newAlimentForm.invalid">Add an aliment</button>
-                <button class="btn btn-success primary-color text-white" type="button" (click)="onClose()">Cancel</button>
+                <button *ngIf="newAliment.name" class="btn btn-success primary-color text-white mr-1" type="submit" [disabled]="newAlimentForm.invalid">Ajouter : {{newAliment.name}}</button>
+                <button *ngIf="!newAliment.name" class="btn btn-success primary-color text-white mr-1" type="submit" [disabled]="newAlimentForm.invalid">Ajouter</button>
+                <button class="btn btn-success primary-color text-white" type="button" (click)="onClose()">Annuler</button>
             </div>
         </form>
     </div>

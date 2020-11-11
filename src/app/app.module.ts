@@ -18,7 +18,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconRegistry, MatIconModule } from '@angular/material/icon';
 import { MatAutocompleteModule } from'@angular/material/autocomplete';
 import { MatInputModule } from'@angular/material/input';
-import {DomSanitizer} from '@angular/platform-browser';
+import { DomSanitizer} from '@angular/platform-browser';
 import { ParameterGroceryComponent } from './grocery/parameter-grocery/parameter-grocery.component';
 import { ParameterGroceryItemComponent } from './grocery/parameter-grocery/parameter-grocery-item/parameter-grocery-item.component';
 import { GroceryService } from './services/grocery.service';
@@ -27,6 +27,7 @@ import * as firebase from 'firebase';
 import { ListGroceryComponent } from './grocery/list-grocery/list-grocery.component';
 import { AddFormComponent } from './grocery/list-grocery/add-form/add-form.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const appRoutes : Routes = [
@@ -34,7 +35,7 @@ const appRoutes : Routes = [
   { path: 'signUp', component: SignupComponent},
   { path: 'grocery/parameter', canActivate:[AuthGuardService], component: ParameterGroceryComponent},
   { path: 'grocery/list', canActivate:[AuthGuardService], component: ListGroceryComponent},
-  {path: 'fridge', canActivate:[AuthGuardService], component: FridgeComponent},
+  { path: 'fridge', canActivate:[AuthGuardService], component: FridgeComponent},
   { path: '', canActivate:[AuthGuardService], component: FridgeComponent},
   { path: '**', canActivate:[AuthGuardService], component: FridgeComponent}
 ];
@@ -67,6 +68,7 @@ firebase.analytics();
     MatIconModule,
     MatAutocompleteModule,
     MatFormFieldModule,
+    MatTooltipModule,
     MatInputModule,
     NgbModule
   ],
