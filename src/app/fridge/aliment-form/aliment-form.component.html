@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row">
-        <h2>Add an aliment</h2>
+        <h2>Add an aliment {{newAliment.name}}</h2>
     </div>
     <div class="row">
         <form  [formGroup]="newAlimentForm" (ngSubmit)="onSaveAliment()">
@@ -26,7 +26,7 @@
                     <div *ngIf="newAlimentForm.get('quantity').errors.min" class="alert alert-danger">
                         Need postitive number
                     </div>
-                    
+
                 </div>
             </div>
             <div class="form-group">

@@ -23,7 +23,7 @@ export class GroceryService {
     const maxQuantity = aliment.maxQuantity;
     const minQuantity = aliment.minQuantity;
     const quantityToBuyChangeByUser = aliment.quantityToBuyChangeByUser;
-    
+
     if(!quantityToBuyChangeByUser) {
       if( quantity <= minQuantity) {
         aliment.quantityToBuy = maxQuantity - quantity;
