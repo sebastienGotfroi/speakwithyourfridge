@@ -36,27 +36,11 @@ export class ListGroceryComponent implements OnInit {
     });
   }
 
-  quantityChange(aliment: Aliment) {
-    this.alimentService.modifyAliment(aliment);
-  }
-
-  quantityToBuyChange(aliment: Aliment) {
-    if(aliment.quantityToBuy > 0) {
-      aliment.quantityToBuyChangeByUser = true;
-      this.alimentService.modifyAliment(aliment);
-    } else {
-      aliment.quantityToBuyChangeByUser = false;
-      this.alimentService.modifyAliment(aliment);
-    }
-  }
   fillTheFridge() {
     this.alimentService.fillTheFridgeWithAllTheListAndSave();
     this.alimentService.calculateGroceryList();
   }
 
-  fillTheFridgeWithOneAliment(aliment:Aliment) {
-    this.alimentService.fillTheFridgeWithOneElementAndSave(aliment);
-  }
   filter() {
     if(this.groceryList && this.searchInput !== undefined) {
       this.copyAliments = this.groceryList.filter(aliment => aliment.name.toLowerCase().includes(this.searchInput.toLocaleLowerCase())); 

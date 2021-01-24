@@ -30,6 +30,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { GroceryListDetailComponent } from './grocery/list-grocery/grocery-list-detail/grocery-list-detail.component';
 
 const appRoutes : Routes = [
   { path: 'signIn', component: SigninComponent},
@@ -56,7 +57,8 @@ firebase.analytics();
     ParameterGroceryComponent,
     ParameterGroceryItemComponent,
     ListGroceryComponent,
-    AddFormComponent
+    AddFormComponent,
+    GroceryListDetailComponent
   ],
   imports: [
     BrowserModule,

@@ -1,11 +1,10 @@
-<h2>Grocery list</h2>
-<div class="row  mx-auto">
-    <div class="col-xs-6 col-sm-6">
+<div class="row  mx-auto my-5">
+    <div class="col-6 col-sm-6">
         <button class="btn text-white primary-color" (click)="showAddModal()">
             Add aliment
         </button>
     </div>
-    <div class="col-xs-6 col-sm-6">
+    <div class="col-6 col-sm-6">
         <button class="btn text-white primary-color" (click)="fillTheFridge()" [disabled]="copyAliments.length===0">
             Fill the fridge
         </button>
@@ -15,24 +14,9 @@
     <input type="text" id="search" placeholder="Search Aliment" class="form-control" [(ngModel)]=searchInput (ngModelChange)="filter()">
 </div>
 <div class="row my-2">
-    <ul class="listgroup col-xs-12 col-sm-12">
+    <ul class="listgroup col-12 col-sm-12">
         <li *ngFor="let aliment of copyAliments; let i = index" class="list-group-item">
-            <div class="row">
-                <h3 class="col-xs-6 col-sm-6">{{aliment.name}}</h3>
-                <div class="col-xs-6 col-sm-6">
-                    <button class="btn btn-sm text-white primary-color float-right" (click)="fillTheFridgeWithOneAliment(aliment)">
-                        Add {{aliment.quantityToBuy}} {{aliment.name}} to the fridge
-                    </button>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="text-secondary" for="quantity">Quantity in the fridge</label>
-                <input type="number" min="0" id="quantity" class="form-control" placeholder="" [(ngModel)]="aliment.quantity" (change)="quantityChange(aliment)">
-            </div>
-            <div class="form-group">
-                <label class="text-secondary" for="quantityToBuy">Quantity to buy</label>
-                <input type="number" min="0" id="quantityToBuy" class="form-control" placeholder="Quantity to buy" [(ngModel)]="aliment.quantityToBuy" (change)="quantityToBuyChange(aliment)">
-            </div>
+            <grocery-list-detail [aliment]=aliment></grocery-list-detail>
         </li>
     </ul>
 </div>

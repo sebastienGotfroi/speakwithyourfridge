@@ -44,7 +44,7 @@ export class AlimentService {
      firebase.database().ref('/fridge/'+this.authService.uid).on('value', (data: DataSnapshot) => {
       
       if(data.val()) {
-        this.fridge = data.val();
+        this.copyData(data.val());
         if(!this.fridge.aliments) {
           this.fridge.aliments = new Array<Aliment>();
         }
@@ -107,6 +107,28 @@ export class AlimentService {
       aliment.quantityToBuyChangeByUser = false;
       this.groceryService.calculateQuantityToBuy(aliment);
       this.calculateGroceryList();
+   }
+
+   private copyData(jsonData: Fridge) {
+    let jsonAliments: Array<Aliment> = jsonData.aliments;
+    
+    jsonAliments.forEach(jsonAliment => {
+      let aliment = this.fridge.aliments.find(aliment => aliment.name === jsonAliment.name);
+
+      if(!aliment) {
+        aliment = new Aliment(jsonAliment.name, jsonAliment.quantity);
+        this.fridge.aliments.push(aliment);
+      }
+      aliment.quantity = jsonAliment.quantity;
+      aliment.minQuantity = jsonAliment.minQuantity;
+      aliment.maxQuantity = jsonAliment.maxQuantity
+      aliment.quantityToBuy = jsonAliment.quantityToBuy;
+      aliment.quantityToBuyChangeByUser = jsonAliment.quantityToBuyChangeByUser;
+      aliment.isAutomatic = jsonAliment.isAutomatic;
+    });
+
+    //remove aliments that are in the json
+    this.fridge.aliments = this.fridge.aliments.filter(aliment => jsonAliments.some(jsonAliment => aliment.name === jsonAliment.name));
    }
 
 }
