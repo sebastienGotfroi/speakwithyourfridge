@@ -48,3 +48,8 @@ testem.log
 Thumbs.db
 /SpeakWithYourFridgeFirebase
 /.firebase
+
+#env
+
+/src/environments
+src/environments/environment.prod.ts

@@ -20,7 +20,7 @@
     <div class="form-group row my-2">
         <label class="text-secondary col-7" for="quantity">Quantity in the fridge</label>
         <div class="col-5 row no-gutters">
-            <button class="btn btn-sm text-white second-color col-3 offset-1 " (click)="addOneQuantityInTheFridge(false)">
+            <button class="btn btn-sm text-white second-color col-3 offset-1" (click)="addOneQuantityInTheFridge(false)">
                 <mat-icon  [inline]="true">remove</mat-icon> 
             </button>
             <input type="number" min="0" id="quantity" class="form-control col-5 text-center" placeholder="" [(ngModel)]="aliment.quantity" (change)="quantityChange()">

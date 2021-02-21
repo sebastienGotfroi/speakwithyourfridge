@@ -53,6 +53,10 @@ export class ParameterGroceryItemComponent implements OnInit, OnChanges {
       this.errors = {'maxQuantityRequired' : true};
       return false;
     } 
+    if(minQuantity <0) {
+      this.errors = {'minQuantityNegative' : true};
+      return false;
+    }
     
     this.errors = null;
     return true;
@@ -66,6 +70,24 @@ export class ParameterGroceryItemComponent implements OnInit, OnChanges {
 
       this.alimentChange.emit(this.aliment);
     }
+  }
+
+  addMaxQuantity(positive: boolean) {
+    if(positive) {
+      this.copyAliment.maxQuantity++;
+    } else {
+      this.copyAliment.maxQuantity--;
+    }
+    this.updateValue();
+  }
+
+  addMinQuantity(positive: boolean) {
+    if(positive) {
+      this.copyAliment.minQuantity++;
+    } else {
+      this.copyAliment.minQuantity--;
+    }
+    this.updateValue();
   }
 
 }

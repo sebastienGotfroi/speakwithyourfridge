@@ -7,13 +7,29 @@
         </div> 
     </mat-checkbox>
      
-    <div class="form-group">
-        <label class="text-secondary" for="maxQuantity">Max quantity</label>
-        <input type="number" min="0" id="maxQuantity" class="form-control" placeholder="Max quantity" (change)="updateValue()" [(ngModel)]="copyAliment.maxQuantity">
+    <div class="form-group row">
+        <label class="text-secondary col-7" for="maxQuantity">Max quantity</label>
+        <div class="col-5 row no-gutters">
+            <button class="btn btn-sm text-white second-color col-3 offset-1" (click)="addMaxQuantity(false)">
+                <mat-icon  [inline]="true">remove</mat-icon> 
+            </button>    
+            <input type="number" min="0" id="maxQuantity" class="form-control col-5 text-center" placeholder="Max quantity" (change)="updateValue()" [(ngModel)]="copyAliment.maxQuantity">
+            <button class="btn btn-sm text-white second-color col-3" (click)="addMaxQuantity(true)">
+                <mat-icon  [inline]="true">add</mat-icon> 
+            </button>
+        </div>    
     </div>
-    <div class="form-group">
-        <label class="text-secondary" for="minQuantiy"> Min quantity</label>
-        <input type="number" min="0" id="minQuantity" class="form-control" placeholder="Min quantity" (change)="updateValue()" [(ngModel)]="copyAliment.minQuantity">
+    <div class="form-group row">
+        <label class="text-secondary col-7" for="minQuantiy"> Min quantity</label>
+        <div class="col-5 row no-gutters">
+            <button class="btn btn-sm text-white second-color col-3 offset-1" (click)="addMinQuantity(false)">
+                <mat-icon  [inline]="true">remove</mat-icon> 
+            </button> 
+            <input type="number" min="0" id="minQuantity" class="form-control col-5 text-center" placeholder="Min quantity" (change)="updateValue()" [(ngModel)]="copyAliment.minQuantity">
+            <button class="btn btn-sm text-white second-color col-3" (click)="addMinQuantity(true)">
+                <mat-icon  [inline]="true">add</mat-icon> 
+            </button>
+        </div>
     </div>
 
     <div class="alert alert-danger" *ngIf="errors">
@@ -25,6 +41,9 @@
         </div>
         <div *ngIf="this.errors.maxQuantityLowerThanMinQuantity">
             Max quantity has to be higher than min quantity
+        </div>
+        <div *ngIf="this.errors.minQuantityNegative">
+            Min Quantity has to be higher than 0
         </div>
     </div>
 </li>
