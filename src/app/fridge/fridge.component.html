@@ -1,7 +1,7 @@
 <h2>Mon frigo</h2>
 <div class="row">
-    <div class="form-group col-sm-6">
-        <input type="text" id="search" placeholder="Chercher un aliment" class="form-control" [(ngModel)]=searchInput (ngModelChange)="initTabs()">
+    <div class="search form-group col-sm-6">
+        <input type="text" id="search" placeholder="Chercher un aliment" class="form-control" [(ngModel)]=searchInput (ngModelChange)="filter()">
     </div>
     <div class="col-sm-6">
         <button type="button" class="btn text-white primary-color" (click)="showAliment()">Ajouter un nouvel aliment</button>
@@ -9,22 +9,12 @@
 </div>
 <hr/>
 <div class="row">
-    <div class="col-sm-6">
-        <div *ngFor="let aliment of alimentsColLeft" class="form-group">
-            <label [className]="aliment.quantityToBuy > 0 ? 'text-danger' : 'text-secondary'" for="aliment.name">{{aliment.name}}</label>
-            <button class="btn btn-sm btn-outline-danger float-right" (click)="deleteAliment(aliment)">
+        <div *ngFor="let aliment of copyAliments" class="form-group aliment col-6">
+            <label [className]="aliment.quantityToBuy > 0 ? 'text-danger' : ''" for="aliment.name">{{aliment.name}}</label>
+            <button class="btn btn-sm btn-outline-danger my-2 float-right" (click)="deleteAliment(aliment)">
                 <mat-icon  [inline]="true">delete_outline</mat-icon> 
             </button>
             <input type="number" min="0" [id]="aliment.name" [(ngModel)]="aliment.quantity" (change)="save(aliment)" class="form-control">
         </div>
-    </div>
-    <div class="col-sm-6">
-        <div *ngFor="let aliment of alimentsColRight" class="form-group">
-            <label [className]="aliment.quantityToBuy > 0 ? 'text-danger' : 'text-secondary'" for="aliment.name">{{aliment.name}}</label>
-            <button class="btn btn-sm btn-outline-danger float-right" (click)="deleteAliment(aliment)">
-                <mat-icon [inline]="true">delete_outline</mat-icon>            </button>
-            <input type="number" min="0" [id]="aliment.name" [(ngModel)]="aliment.quantity" (change)="save(aliment)" class="form-control">
-        </div>
-    </div>
 </div>
 

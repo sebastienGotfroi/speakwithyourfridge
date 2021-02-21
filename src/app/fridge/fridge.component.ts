@@ -30,7 +30,7 @@ export class FridgeComponent implements OnInit, OnDestroy {
       (value:Aliment[]) => {
         this.aliments = value;
         this.copyAliments = value;
-        this.initTabs();
+        this.filter();
       }
     );
     this.alimentService.getAllAliments();
@@ -38,15 +38,6 @@ export class FridgeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.alimentSubscription.unsubscribe();
-  }
-
-  initTabs() {
-      this.filter();
-      const numberOfAliments = this.copyAliments.length;
-      const endFirstCol = Math.ceil(numberOfAliments/2)
-
-      this.alimentsColLeft = this.copyAliments.slice(0, endFirstCol);
-      this.alimentsColRight = this.copyAliments.slice(endFirstCol, numberOfAliments);
   }
 
   showAliment() {

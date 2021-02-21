@@ -1,0 +1,5 @@
+.aliment {
+    background-color: white;
+    /*border: solid 0.5px var(--primary-color);*/
+    padding: 1rem;
+}

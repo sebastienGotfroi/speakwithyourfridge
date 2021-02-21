@@ -1,21 +1,42 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --primary-color: #40CB7C;
+    --accent-color: #404ACB;
+    --text-color: #333;
+}
 
 .primary-color {
-    background:#40CB7C;
+    background:var(--primary-color);
 }
 
 .second-color {
-    background: #404ACB;
+    background: var(--accent-color);
 }
 
 button:hover.second-color {
-    background: #408FCB;
+    background: #343ca7;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+button:hover.primary-color {
+    background: #36ad6a;
+}
+html, body { 
+    background: #f8f8f8;
+    height: auto; 
+}
+body { 
+    background-image: url(assets/img/food.png);
+    background-repeat: repeat;
+    margin: 0; 
+    font-family: 'Montserrat', sans-serif !important;
+    color: var(--text-color);
+}
+
+main {
+    background: #f8f8f888;
+}
 
 .custom-modalbox >
     mat-dialog-container {
-        background: #404ACB ;
+        background: var(--accent-color) ;
     }
 
